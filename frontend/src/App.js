@@ -48,6 +48,16 @@ class App extends Component{
   render(){
     return(
       <div>
+        <nav
+          className="w3-bar w3-blue w3-margin-bottom"
+        >
+          <button
+            type="button"
+            className="w3-button w3-bar-item"
+          >
+            Upload
+          </button>
+        </nav>
         <div
           className="w3-card-4 w3-round"
           style={{ maxWidth: "500px", width: "70%", padding: "20px", margin: "0 auto" }}
