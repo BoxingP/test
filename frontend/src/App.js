@@ -10,6 +10,14 @@ class App extends Component{
         image: null
       }
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e){
+    const data = this.state.info;
+    data[e.target.name] = e.target.value;
+    this.setState({ info: data });
   }
 
   render(){
@@ -30,12 +38,14 @@ class App extends Component{
               name="title"
               value={this.state.info.title}
               placeholder="Enter image title"
+              onChange={this.handleChange}
               className="w3-input w3-border w3-round w3-margin-bottom"
             />
             <textarea
               name="content"
               value={this.state.info.content}
               placeholder="Enter content for the image"
+              onChange={this.handleChange}
               className="w3-input w3-border w3-round w3-margin-bottom"
               style={{ resize: "none" }}
             />
