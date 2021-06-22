@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 class App extends Component{
   constructor(){
     super();
@@ -26,6 +28,22 @@ class App extends Component{
     data.image = e.target.files[0];
     this.setState({ info: data });
   }
+
+  handleSubmit = () => {
+    let form_data = new FormData();
+
+    form_data.append('image', this.state.info.image, this.state.info.image.name);
+    form_data.append('title', this.state.info.title);
+    form_data.append('content', this.state.info.content);
+
+    axios.post('http://localhost:8000/api/posts/', form_data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(() => console.log("Uploaded"))
+    .catch(err => console.log(err));
+  };
 
   render(){
     return(
@@ -65,11 +83,13 @@ class App extends Component{
             <input
               id="imgholder"
               type="file"
+              onChange={this.handleImageChange}
               accept="image/jpeg, image/png"
               className="w3-hide"
             />
             <button
               type="button"
+              onClick={this.handleSubmit}
               className="w3-button w3-blue w3-round w3-card"
             >
               Submit
