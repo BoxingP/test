@@ -2,28 +2,29 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-class App extends Component{
-  constructor(){
+class App extends Component {
+  constructor() {
     super();
     this.state = {
       info: {
         title: "",
         content: "",
         image: null
-      }
+      },
+      show: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
   }
 
-  handleChange(e){
+  handleChange(e) {
     const data = this.state.info;
     data[e.target.name] = e.target.value;
     this.setState({ info: data });
   }
 
-  handleImageChange(e){
+  handleImageChange(e) {
     const data = this.state.info;
     data.image = e.target.files[0];
     this.setState({ info: data });
@@ -41,27 +42,44 @@ class App extends Component{
         'Content-Type': 'multipart/form-data'
       }
     })
-    .then(() => console.log("Uploaded"))
-    .catch(err => console.log(err));
+      .then(() => {
+        console.log("Uploaded");
+        this.setState({
+          info: {
+            title: "",
+            content: "",
+            image: null,
+          },
+          show: false
+        });
+      })
+      .catch(err => console.log(err));
   };
 
-  render(){
-    return(
-      <div>
-        <nav
-          className="w3-bar w3-blue w3-margin-bottom"
+  handleModal = () => {
+    if(!this.state.show)
+      this.setState({ show: true });
+    else
+      this.setState({ show: false });
+  };
+
+  UploadImageModal = ({ show, handleModal }) => {
+    const showHideClassName = show ? "w3-modal w3-show" : "w3-modal"
+    return (
+      <div
+        className={showHideClassName}
+      >
+        <div
+          className="w3-container w3-modal-content w3-round w3-animate-top"
+          style={{ maxWidth: "500px", width: "70%", padding: "20px"}}
         >
           <button
             type="button"
-            className="w3-button w3-bar-item"
+            onClick={handleModal}
+            className="w3-button w3-round w3-display-topright"
           >
-            Upload
+            X
           </button>
-        </nav>
-        <div
-          className="w3-card-4 w3-round"
-          style={{ maxWidth: "500px", width: "70%", padding: "20px", margin: "0 auto" }}
-        >
           <h2
             className="w3-center"
           >
@@ -106,6 +124,28 @@ class App extends Component{
             </button>
           </form>
         </div>
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        <nav
+          className="w3-bar w3-blue w3-margin-bottom"
+        >
+          <button
+            type="button"
+            onClick={this.handleModal}
+            className="w3-button w3-bar-item"
+          >
+            Upload
+          </button>
+        </nav>
+        <this.UploadImageModal
+          show={this.state.show}
+          handleModal={this.handleModal}
+        />
       </div>
     );
   }
