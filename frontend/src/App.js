@@ -12,10 +12,21 @@ class App extends Component {
         image: null
       },
       show: false,
+      Data: []
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+  }
+
+  refreshList = () => {
+    axios.get('http://localhost:8000/api/posts/')
+      .then(res => this.setState({ Data: res.data }))
+      .catch(err => console.log(err));
+  };
+
+  componentDidMount() {
+    this.refreshList();
   }
 
   handleChange(e) {
@@ -57,7 +68,7 @@ class App extends Component {
   };
 
   handleModal = () => {
-    if(!this.state.show)
+    if (!this.state.show)
       this.setState({ show: true });
     else
       this.setState({ show: false });
@@ -71,7 +82,7 @@ class App extends Component {
       >
         <div
           className="w3-container w3-modal-content w3-round w3-animate-top"
-          style={{ maxWidth: "500px", width: "70%", padding: "20px"}}
+          style={{ maxWidth: "500px", width: "70%", padding: "20px" }}
         >
           <button
             type="button"
@@ -129,6 +140,41 @@ class App extends Component {
   };
 
   render() {
+    const dataComponent = this.state.Data.map(data => {
+      return (
+        <div
+          className="w3-third w3-round w3-margin-bottom w3-padding"
+        >
+          <div
+            className="w3-card-4 w3-display-container w3-round"
+          >
+            <a
+              target="blank"
+              href={"http://localhost:8000" + data.image}
+            >
+              <img
+                src={"http://localhost:8000" + data.image}
+                alt={data.title}
+                className="w3-image w3-hover-grayscale w3-round"
+              />
+            </a>
+            <div
+              className="w3-display-topmiddle w3-text-white"
+            >
+              <h4>
+                {data.title}
+              </h4>
+            </div>
+            <p
+              className="w3-justify w3-text-gray w3-padding"
+            >
+              {data.content}
+            </p>
+          </div>
+        </div>
+      );
+    });
+
     return (
       <div>
         <nav
@@ -142,6 +188,13 @@ class App extends Component {
             Upload
           </button>
         </nav>
+
+        <div
+          className="w3-row"
+        >
+          {dataComponent}
+        </div>
+
         <this.UploadImageModal
           show={this.state.show}
           handleModal={this.handleModal}
