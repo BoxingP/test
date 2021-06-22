@@ -12,11 +12,18 @@ class App extends Component{
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   handleChange(e){
     const data = this.state.info;
     data[e.target.name] = e.target.value;
+    this.setState({ info: data });
+  }
+
+  handleImageChange(e){
+    const data = this.state.info;
+    data.image = e.target.files[0];
     this.setState({ info: data });
   }
 
