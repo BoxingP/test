@@ -1,29 +1,87 @@
-# Django React Image Example
-## Description
-This repo is a simple example for storing images in our database using django rest api and react.js
 
-## What does this project offer
-This project lets you upload images to the database using django rest api call. \
-Its a simple app that displays the uploaded images to the main page. \
-All the images are uploaded in a descending order respective of the time they were uploaded.
+# Image Uploader [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-## How to use
-Step 1: Clone this repo onto your local Machine. \
-Step 2: Add your django secret key in the backend settings.py file. \
-Step 3: Open Shell and cd into backend. \
-Step 4: Run the backend server by typing py manage.py runserver. \
-Step 5: Now, Open Another Shell window and add CRA(Create-React-App) dependencies using npx create-react-app into frontend. \
-Step 6: cd into frontend. \
-Step 7: Run the frontend server using npm start command. \
-Step 8: Open http://localhost:3000 from your browser.
+A simple image uploading app. Upload any kind of images and see instant feedback on the main screen.
+## Appendix
 
-**Note**: I Have deleted the css library, please add w3.css framework from https://www.w3schools.com/w3css/4/w3.css
+This app allows you to upload almost any kind of images. This app uses ReactJS at the frontend and uses Django Rest API to upload and fetch data.
+## Features
 
-## How to add images
-Click in the upload button in the nav bar. \
-Fill in the details and add new image. \
-Hit submit. The pop-up will close automatically and the page will refresh automatically. \
-You will see the image you uploaded with title and content on the the page.
+- Upload Images
+- Pop-up modal for uploader
+- Responsive design
+- Live Preview of uploaded images
+## Run Locally
 
-## Author & Copyright
-This app is written by Aditya Joshi Modifying and publishing this project can be done using copyright text Copyright Aditya Joshi © Joshi's
+Clone the project
+
+```bash
+  git clone https://github.com/adijoshi82812/django-react-image.git
+```
+
+### Run the backend server
+
+Go to the backend directory
+
+```bash
+  cd backend
+```
+
+Create Virtual Environment
+
+```bash
+  python3 -m venv backend-env
+```
+
+Activate the virtual environment
+
+```bash
+  source backend-env/bin/activate
+```
+
+Install requirements.txt
+
+```bash
+  pip install -r requirements.txt
+```
+
+Run the backend server
+
+```bash
+  python3 manage.py runserver
+```
+
+### Run the frontend server
+
+Go to frontend directory
+
+```bash
+  cd frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Run the frontend server
+
+```bash
+  npm start
+```
+
+**Note** : Download w3.css framework from https://www.w3schools.com/w3css/4/w3.css and add it inside the frontend/src directory.
+## Screenshots
+
+![HomePage](https://raw.githubusercontent.com/adijoshi82812/django-react-image/main/screenshots/1.png) \
+![Upload Image](https://raw.githubusercontent.com/adijoshi82812/django-react-image/main/screenshots/2.png)
+## Feedback
+
+If you have any feedback, please reach out to me at adijoshi82812@gmail.com
+## Authors
+
+- [@Aditya Joshi](https://www.github.com/adijoshi82812)
+## 🚀 About Me
+
+I'm a full stack developer. I use python-django at the Back End and react.js at the Front End.
